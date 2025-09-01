@@ -1,7 +1,7 @@
 # Bisection Method: Theory and Analysis
 
 ## Introduction
-The bisection method is a root-finding algorithm used to approximate the roots of a continuous function $f(x)$ within a given interval $[a, b]$. It is a simple, robust, and reliable method that leverages the Intermediate Value Theorem, which states that if $f(a)$ and $f(b)$ have opposite signs, then there exists at least one root $x^*$ in $[a, b]$ such that $f(x^*) = 0$.
+The bisection method is a root-finding algorithm used to approximate the roots of a continuous function $f(x)$ within a given interval $[a, b]$. It is a simple, robust, and reliable method that leverages the Intermediate Value Theorem, which states that if $f(a)$ and $f(b)$ have opposite signs, then there exists at least one root $x_{r}$ in $[a, b]$ such that $f(x_{r}) = 0$.
 
 ## Algorithm
 The bisection method iteratively narrows the interval containing the root by halving it in each step. Below is the step-by-step algorithm:
@@ -19,10 +19,16 @@ The bisection method iteratively narrows the interval containing the root by hal
 *Caption: Bisection method - interval halved with each iteration.*
 
 ## Convergence
-The bisection method exhibits **linear convergence** with a rate of convergence of $\frac{1}{2}$. Linear convergence is defined for a sequence of iterates $\{x_n : n \geq 0\}$ converging to a root $x^*$ if $|x_{n+1} - x^*| \leq c |x_n - x^*|^p, n \geq 0$, where $p = 1$ for linear convergence, and $c < 1$ is the asymptotic error constant. For the bisection method, the error bound is halved in each iteration: $|x_n - x^*| \leq \frac{1}{2^n} |b_0 - a_0|$, where $x_n$ is the midpoint of the interval $[a_n, b_n]$ at iteration $n$, and $|b_0 - a_0|$ is the width of the initial interval. This is derived as follows:
+The bisection method exhibits **linear convergence** with a rate of convergence of $\frac{1}{2}$. Linear convergence is defined for a sequence of iterates $\{x_n : n \geq 0\}$ converging to a root $x_{r}$ if $|x_{n+1} - x_{r}| \leq c |x_n - x_{r}|^p, \quad n \geq 0$, where $p = 1$ for linear convergence, and $c < 1$ is the asymptotic error constant. For the bisection method, the error bound is halved in each iteration:
 
-- Initial error bound: $|x_1 - x^*| \leq \frac{1}{2} |x_0 - x^*|$.
-- After $n$ iterations: $|x_n - x^*| \leq \left(\frac{1}{2}\right)^n |b_0 - a_0|$.
+$$
+|x_n - x_{r}| \leq \frac{1}{2^n} |b_0 - a_0|,
+$$
+
+where $x_n$ is the midpoint of the interval $[a_n, b_n]$ at iteration $n$, and $|b_0 - a_0|$ is the width of the initial interval. This is derived as follows:
+
+- Initial error bound: $|x_1 - x_r| \leq \frac{1}{2} |x_0 - x_r|$.
+- After $n$ iterations: $|x_n - x_r| \leq \left(\frac{1}{2}\right)^n |b_0 - a_0|$.
 
 The constant $c = \frac{1}{2}$ indicates that the error is reduced by half with each iteration, confirming linear convergence.
 
@@ -41,7 +47,7 @@ $$
 n \geq \frac{\log(|b_0 - a_0|) - \log(\text{TOL})}{\log(2)}.
 $$
 
-This formula allows users to compute the minimum number of iterations needed to achieve the desired accuracy.
+This formula enables users to determine the minimum number of iterations required to achieve the desired accuracy.
 
 ## Advantages
 1. **Guaranteed Convergence**: The bisection method is a bracketing method, meaning it always converges to a root as long as the initial interval $[a, b]$ contains a root (i.e., $f(a) \cdot f(b) < 0$).
